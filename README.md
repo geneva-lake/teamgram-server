@@ -4,81 +4,10 @@
 ## Introduce
 Open source [mtproto](https://core.telegram.org/mtproto) server implementation written in golang, support private deployment.
 
-## Features
-- MTProto 2.0
-  - Abridged
-  - Intermediate
-  - Padded intermediate
-  - Full
-- API Layer: 158
-- private chat
-- basic group
-- contacts
-
-## Architecture
-![Architecture](docs/image/architecture-001.png)
-
-## Installing Teamgram 
-`Teamgram` relies on open source high-performance components: 
-
-- **mysql5.7**
-- [redis](https://redis.io/)
-- [etcd](https://etcd.io/)
-- [kafka](https://kafka.apache.org/quickstart)
-- [minio](https://docs.min.io/docs/minio-quickstart-guide.html#GNU/Linux)
-- [ffmpeg](https://www.johnvansickle.com/ffmpeg/)
-
-Privatization deployment Before `Teamgram`, please make sure that the above five components have been installed. If your server does not have the above components, you must first install Missing components. 
-
-- [Centos9 Stream Build and Install](docs/install-centos-9.md) [@A Feel]
-- [CentOS7 teamgram-server环境搭建](docs/install-centos-7.md) [@saeipi]
-
-If you have the above components, it is recommended to use them directly. If not, it is recommended to use `docker-compose-env.yaml`.
-
 
 ### Source code deployment
 #### Install [Go environment](https://go.dev/doc/install). Make sure Go version is at least 1.17.
 
-
-#### Get source code　
-
-```
-git clone https://github.com/teamgram/teamgram-server.git
-cd teamgram-server
-```
-
-#### Init data
-- init database
-
-	```
-	1. create database teamgram
-	2. init teamgram database
-	   mysql -uroot teamgram < teamgramd/sql/1_teamgram.sql
-	   mysql -uroot teamgram < teamgramd/sql/migrate-*.sql
-  	   mysql -uroot teamgram < teamgramd/sql/z_init.sql
-	```
-
-- init minio buckets
-	- bucket names
-	  - `documents`
-	  - `encryptedfiles`
-	  - `photos`
-	  - `videos`
-	- Access `http://ip:xxxxx` and create
-
-
-#### Build
-	
-```
-make
-```
-
-#### Run
-
-```
-cd teamgramd/bin
-./runall2.sh
-```
 
 ### Docker deployment
 #### Install [Docker](https://docs.docker.com/get-docker/)
@@ -88,11 +17,20 @@ cd teamgramd/bin
 #### Get source code
 
 ```
-git clone https://github.com/teamgram/teamgram-server.git
+git clone https://github.com/geneva-lake/teamgram-server.git
 cd teamgram-server
 ```
 
 #### Run
+
+```
+At first you need bring into the line versions of components. If you use v0.158.0 version
+of [teamgram-proto](https://github.com/teamgram/proto) you should checkout to v.0.90.5 tag of teamgram server.
+Teamgram-proto has a huge up to 10 megabyte files which makes build difficult. Building could consume all memory
+of your computer and stuck. Setting GOMEMLIMIT to restring memory consumption could help. This environment variable
+was introduced in go 1.20 so we need to switch to this version of golang. Also you could set smallframes flag in
+the compilator arguments.
+```
 
 ```  
 # run dependency
@@ -101,26 +39,6 @@ docker-compose -f ./docker-compose-env.yaml up -d
 # run docker-compose
 docker-compose up -d
 ```
-	
-## Compatible clients
-**Important**: default signIn verify code is **12345**
-
-[Android client for Teamgram](clients/teamgram-android.md)
-
-[iOS client for Teamgram](clients/teamgram-ios.md)
-
-[tdesktop for Teamgram](clients/teamgram-tdesktop.md)
-
-## Feedback
-Please report bugs, concerns, suggestions by issues, or join telegram group **[Teamgram](https://t.me/+TjD5LZJ5XLRlCYLF)** to discuss problems around source code.
-
-## Notes
-If need enterprise edition:
-
-- sticker/theme/wallpaper/reactions/2fa/sms/push(apns/web/fcm)/web...
-- channel/megagroup
-- audiocall/videocall/groupcall
-- bots
 
 please PM the **[author](https://t.me/benqi)**
 

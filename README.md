@@ -23,14 +23,13 @@ cd teamgram-server
 
 #### Run
 
-```
 At first you need bring into the line versions of components. If you use v0.158.0 version
-of [teamgram-proto](https://github.com/teamgram/proto) you should checkout to v.0.90.5 tag of teamgram server.
-Teamgram-proto has a huge up to 10 megabyte files which makes build difficult. Building could consume all memory
-of your computer and stuck. Setting GOMEMLIMIT to restring memory consumption could help. This environment variable
-was introduced in go 1.20 so we need to switch to this version of golang. Also you could set smallframes flag in
-the compilator arguments.
-```
+of [teamgram-proto](https://github.com/teamgram/proto) you should checkout to v.0.90.5 tag
+of teamgram server. Teamgram-proto has a huge up to 10 megabyte files which makes build
+difficult. Building could consume all memory of your computer and stuck. Setting GOMEMLIMIT 
+to restring memory consumption could help. This environment variable was introduced in
+go 1.20 so we need to switch to this version of golang. Also you could set smallframes
+flag in the compilator arguments.
 
 ```  
 # run dependency

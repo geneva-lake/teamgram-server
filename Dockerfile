@@ -1,10 +1,13 @@
-FROM golang:1.17 AS builder
+FROM golang:1.20 AS builder
+ENV GOMEMLIMIT=1150MiB
+ENV GOMAXPROCS=1
 WORKDIR /app
 COPY . .
 RUN ./build.sh
 
-FROM ubuntu:latest
+FROM alpine:latest
 WORKDIR /app
 COPY --from=builder /app/teamgramd/ /app/
-RUN apt update -y && apt install -y ffmpeg && chmod +x /app/docker/entrypoint.sh
+RUN apk update && apk add ffmpeg && chmod +x /app/docker/entrypoint.sh
+RUN apk add bash
 ENTRYPOINT /app/docker/entrypoint.sh

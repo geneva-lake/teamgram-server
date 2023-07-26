@@ -38,7 +38,7 @@ docker compose -f ./docker-compose-env.yaml up -d
 # run docker-compose
 docker compose up -d
 ```
-If build stuck one could build first teamgram server image
+If build stuck one could at first create teamgram server image separately
 ```
 docker build -t teamgram-server --progress=plain .
 ```

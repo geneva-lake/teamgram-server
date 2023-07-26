@@ -43,4 +43,15 @@ If build stuck one could at first create teamgram server image separately
 docker build -t teamgram-server --progress=plain .
 ```
 or use prebuilt [image](https://hub.docker.com/r/leopoldblum/teamgram-server)
-and change appropiatly docker-compose.yaml file.
+and change appropiatly docker-compose.yaml file for example as in 
+docker-compose-prebuilt.yaml.
+
+With docker-compose-prebuilt.yaml set up would be
+
+```  
+# run dependency
+docker compose -f ./docker-compose-env.yaml up -d
+
+# run docker-compose
+docker compose -f ./docker-compose-prebuilt.yaml up -d
+```

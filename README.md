@@ -26,9 +26,9 @@ cd teamgram-server
 At first you need bring into the line versions of components. If you use v0.158.0 version
 of [teamgram-proto](https://github.com/teamgram/proto) you should checkout to v.0.90.5 tag
 of teamgram server. Teamgram-proto has a huge up to 10 megabyte files which makes build
-difficult. Building could consume all memory of your computer and stuck. Setting GOMEMLIMIT 
-to restrict memory consumption could help. This environment variable was introduced in
-go 1.20 so we need to switch to this version of golang. This manipulations should be done
+difficult. Building could consume all memory of your computer and eventually stuck. Setting
+GOMEMLIMIT to restrict memory consumption could help. This environment variable was introduced
+in go 1.20 so we need to switch to this version of golang. This manipulations should be done
 in the Dockerfile. Also here I use alpine linux for docker image to reduce consumed space.
 
 ```  
